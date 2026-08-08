@@ -1,0 +1,10 @@
+{{- /* 마크다운 안에 쓴 링크를 HTML 로 바꿀 때 거치는 틀입니다.
+       외부 주소(다른 사이트)면 새 탭에서 열고, 사이트 내부 링크와
+       mailto: 는 지금 탭에서 그대로 엽니다. 파일을 두는 것만으로 적용됩니다. */ -}}
+{{- $dest := .Destination -}}
+{{- $u := urls.Parse $dest -}}
+{{- $siteHost := (urls.Parse .Page.Site.BaseURL).Host -}}
+{{- $external := and $u.Host (ne $u.Host $siteHost) -}}
+<a href="{{ $dest | safeURL }}"
+   {{- with .Title }} title="{{ . }}"{{ end }}
+   {{- if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text }}</a>
