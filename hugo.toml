@@ -1,0 +1,41 @@
+baseURL = 'https://organoidlab.github.io/'
+languageCode = 'en-us'
+title = 'Organoids for Neuroscience Lab'
+
+# 사이트 전역 정보 — 푸터와 Contact 페이지에서 사용합니다.
+[params]
+  institute = 'Brain Science Institute, Korea Institute of Science and Technology'
+  eyebrow = 'Brain Science Institute · KIST'
+  addressLine = '5 Hwarang-ro 14-gil, Seongbuk-gu, Seoul 02792, Korea · KIST L7'
+  email = 'juhyun.lee@kist.re.kr'
+
+# 상단 메뉴 — 순서를 바꾸려면 weight 숫자를 바꾸세요.
+[[menu.main]]
+  name = 'Home'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  name = 'Research'
+  url = '/research/'
+  weight = 2
+
+[[menu.main]]
+  name = 'Publications'
+  url = '/publications/'
+  weight = 3
+
+[[menu.main]]
+  name = 'Team'
+  url = '/team/'
+  weight = 4
+
+[[menu.main]]
+  name = 'Contact'
+  url = '/contact/'
+  weight = 5
+
+disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap']
+
+[markup.goldmark.renderer]
+  unsafe = true

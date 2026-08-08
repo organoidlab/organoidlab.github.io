@@ -1,0 +1,89 @@
+# 팀 구성.
+#
+# photo   : static/images/team/ 안의 파일 이름만 씁니다 (jpg, png, webp 모두 가능).
+#           정사각형 원본을 권장합니다. 예: photo: pi.jpg
+#
+# 굵게 표시 : **별표 두 개**로 감싸면 굵어집니다. 논문 목록의 저자 표기와 같은 방식입니다.
+#             학위(M.S., Ph.D., B.S.)와 직함(Senior Researcher 등)에 씁니다.
+#
+# education / experience : 없으면 그 줄을 통째로 지우세요. 제목까지 자동으로 숨겨집니다.
+#
+# ── 새 멤버 추가 템플릿 ─────────────────────────────────────────
+#   - name: Hong Gildong
+#     role: Ph.D. Student
+#     email: gildong@kist.re.kr          # 없으면 이 줄 삭제
+#     photo: member-1.jpg
+#     education:
+#       - "**M.S.** in Neuroscience, OO University, 2022–2024"
+#       - "**B.S.** in Biology, OO University, 2018–2022"
+#     experience:
+#       - "**Research Assistant**, OO Institute, 2024–2025"
+#
+#   * 별표가 들어간 줄은 반드시 큰따옴표로 감싸세요. YAML 규칙입니다.
+# ────────────────────────────────────────────────────────────
+
+pi:
+  name: Ju-Hyun Lee
+  role: Senior Researcher · Principal Investigator
+  email: juhyun.lee@kist.re.kr
+  photo: pi.svg
+  education:
+    - "**M.S./Ph.D.** in Biomedical Sciences, Korea University College of Medicine, 2015–2020"
+    - "Thesis: *Neural Folding Organoids as a Model of Human Neurulation and Neural Tube Defects in vitro* (Advisor: Prof. Woong Sun)"
+    - "**B.S.** in Molecular Biology, Sejong University, 2011–2015"
+  experience:
+    - "**Senior Researcher**, Brain Science Institute, KIST, 2022–present"
+    - "**Research Professor**, Korea University College of Medicine, 2021–2022"
+    - "**Postdoctoral Researcher**, Korea University College of Medicine, 2020–2021"
+
+# ↓ 아래는 형식을 보여주기 위한 예시입니다.
+#    실제 팀원 정보로 바꾸시고, 사람이 늘면 같은 형식으로 항목을 추가하세요.
+#    순서는 여기 적힌 그대로 표시됩니다. 보통 직급이 높은 순으로 둡니다.
+members:
+  - name: SAMPLE Postdoc A
+    role: Postdoctoral Researcher
+    email: sample-a@kist.re.kr
+    photo: member-1.svg
+    education:
+      - "**Ph.D.** in Neuroscience, OO University, 2019–2024"
+      - "**B.S.** in Life Sciences, OO University, 2015–2019"
+    experience:
+      - "**Postdoctoral Researcher**, Organoids for Neuroscience Lab, KIST, 2024–present"
+
+  - name: SAMPLE Postdoc B
+    role: Postdoctoral Researcher
+    email: sample-b@kist.re.kr
+    photo: member-2.svg
+    education:
+      - "**Ph.D.** in Biomedical Engineering, OO University, 2018–2023"
+      - "**M.S.** in Bioengineering, OO University, 2016–2018"
+      - "**B.S.** in Chemical Engineering, OO University, 2012–2016"
+    experience:
+      - "**Postdoctoral Researcher**, Organoids for Neuroscience Lab, KIST, 2025–present"
+      - "**Postdoctoral Researcher**, OO Institute, 2023–2025"
+
+  # ↓ experience 가 없는 경우. PROFESSIONAL EXPERIENCE 제목까지 통째로 숨겨집니다.
+  - name: SAMPLE Postdoc C
+    role: Postdoctoral Researcher
+    email: sample-c@kist.re.kr
+    photo: member-3.svg
+    education:
+      - "**Ph.D.** in Molecular Biology, OO University, 2020–2025"
+      - "**B.S.** in Biology, OO University, 2016–2020"
+
+  - name: SAMPLE Ph.D. Student
+    role: Ph.D. Student
+    email: sample-d@kist.re.kr
+    photo: member-4.svg
+    education:
+      - "**M.S.** in Neuroscience, OO University, 2022–2024"
+      - "**B.S.** in Life Sciences, OO University, 2018–2022"
+    experience:
+      - "**Research Assistant**, OO Institute, 2024–2025"
+
+  # ↓ 이메일도 없는 경우. 그 줄만 사라집니다.
+  - name: SAMPLE M.S. Student
+    role: M.S. Student
+    photo: member-5.svg
+    education:
+      - "**B.S.** in Biology, OO University, 2021–2025"

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="wrap page">
+  <header class="page-head">
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Content }}<div class="prose page-intro">{{ . }}</div>{{ end }}
+  </header>
+
+  <ol class="pubs">
+    {{ range sort .Site.Data.publications "year" "desc" }}
+    <li class="pub">
+      <div class="pub-year">{{ .year }}</div>
+      <div class="pub-body">
+        <h2 class="pub-title">{{ .title }}</h2>
+        <p class="pub-authors">{{ .authors | markdownify }}</p>
+        <p class="pub-meta">
+          <span class="pub-journal">{{ .journal }}</span>
+          {{ with .doi }}
+            <a class="pub-doi" href="https://doi.org/{{ . }}">doi:{{ . }}</a>
+          {{ end }}
+        </p>
+      </div>
+    </li>
+    {{ end }}
+  </ol>
+
+  <p class="pub-note">* equal contribution &nbsp;·&nbsp; # corresponding author</p>
+</article>
+{{ end }}

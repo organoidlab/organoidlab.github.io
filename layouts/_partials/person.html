@@ -1,0 +1,32 @@
+{{ $p := .p }}
+<div class="person{{ if .lead }} person--lead{{ end }}">
+  <div class="person-photo">
+    {{ with $p.photo }}
+      <img src="{{ (printf "images/team/%s" .) | relURL }}" alt="{{ $p.name }}" loading="lazy" width="400" height="400">
+    {{ end }}
+  </div>
+
+  <div class="person-body">
+    <h3 class="person-name">{{ $p.name }}</h3>
+    {{ with $p.role }}<p class="person-role">{{ . }}</p>{{ end }}
+    {{ with $p.email }}<p class="person-role"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+
+    {{ with $p.education }}
+    <div class="cv">
+      <h4 class="cv-label">Education</h4>
+      <ul class="cv-list">
+        {{ range . }}<li>{{ . | markdownify }}</li>{{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ with $p.experience }}
+    <div class="cv">
+      <h4 class="cv-label">Professional Experience</h4>
+      <ul class="cv-list">
+        {{ range . }}<li>{{ . | markdownify }}</li>{{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</div>

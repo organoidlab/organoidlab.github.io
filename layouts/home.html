@@ -1,0 +1,12 @@
+{{ define "main" }}
+<img class="page-motif" src="{{ "images/hero/organoid.svg" | relURL }}" alt="" aria-hidden="true">
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">{{ .Site.Params.eyebrow }}</p>
+    <h1 class="hero-title">{{ .Params.headline | safeHTML }}</h1>
+    <div class="hero-lede prose">
+      {{ .Content }}
+    </div>
+  </div>
+</section>
+{{ end }}

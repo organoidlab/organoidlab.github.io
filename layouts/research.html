@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="wrap page">
+  <header class="page-head">
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Content }}<div class="prose page-intro">{{ . }}</div>{{ end }}
+  </header>
+
+  <div class="topics">
+    {{ range $i, $t := .Site.Data.research }}
+    <section class="topic">
+      <div class="topic-num" aria-hidden="true">{{ printf "%02d" (add $i 1) }}</div>
+      <div class="topic-body">
+        <h2 class="topic-title">{{ $t.title }}</h2>
+        {{ with $t.keywords }}
+        <p class="topic-keys">{{ delimit . " · " }}</p>
+        {{ end }}
+        <div class="prose">{{ $t.body | markdownify }}</div>
+      </div>
+    </section>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

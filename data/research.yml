@@ -1,0 +1,56 @@
+# 연구 주제. 순서대로 01, 02, 03 번호가 자동으로 붙습니다.
+# 주제를 추가하려면 항목을 하나 더 쓰면 됩니다. keywords는 없어도 됩니다.
+#
+# body 안에서 빈 줄 하나가 문단 나눔입니다.
+
+- title: Self-organization of the caudal neural tube
+  keywords: [Neurulation, Neuromesodermal progenitors, Axis patterning]
+  body: |
+    The vertebrate nervous system arises from the neural tube, which forms
+    through neurulation and elongates caudally from a population of
+    neuromesodermal progenitors at the tail bud. Positional identity along this
+    axis is assigned by opposing WNT and retinoic acid gradients, which we have
+    shown also govern the adhesion and collective migration properties of caudal
+    neural progenitors during axial elongation.
+
+    We reconstruct this process in vitro. Under geometric confinement, human
+    pluripotent stem cells break symmetry and undergo caudalization, generating
+    spinal cord organoids that recapitulate neural tube morphogenesis: lumen
+    formation, apicobasal polarity, and self-ordered dorsoventral patterning
+    established through the spontaneous expression of patterning morphogens
+    rather than exogenous instruction.
+
+- title: Modeling developmental and degenerative disorders
+  keywords: [Neural tube defects, Developmental neurotoxicity, Patient-derived iPSCs]
+  body: |
+    Because our organoids reproduce morphogenesis rather than endpoint identity,
+    they permit quantitative analysis of processes that fail in neural tube
+    defects, the most common congenital malformation of the central nervous
+    system. We have used this system to characterize the transcriptional
+    signature of valproic acid-induced neurulation defects, and to extend such
+    readouts toward teratogenicity screening. In parallel, we model
+    neurodegenerative phenotypes in region-specific organoids carrying
+    disease-linked mutations.
+
+    Interpreting these models requires care. Induction efficiency and regional
+    identity vary substantially with the genetic background of the induced
+    pluripotent stem cell line, and such line-to-line variation can be mistaken
+    for a disease phenotype. Characterizing this variability, and establishing
+    reproducible induction as a precondition for phenotypic claims, is a
+    persistent aim of the laboratory.
+
+- title: Functional characterization and screening
+  keywords: [3D microelectrode arrays, Extracellular electrophysiology, Preclinical screening]
+  body: |
+    Structural fidelity alone is an insufficient criterion for an organoid
+    model. In collaboration with neural engineering groups, we develop
+    three-dimensional high-density microelectrode arrays that record
+    extracellular activity from within intact tissue while permitting local
+    optical stimulation and drug delivery, enabling measurement of synaptic
+    latency and the temporal evolution of network formation.
+
+    Current work extends these measurements to parallel recording across
+    organoid arrays. Dose-dependent functional readouts obtained simultaneously
+    from multiple organoids convert sample-to-sample variability into a
+    quantifiable parameter, which is a prerequisite for using patient-derived
+    models in preclinical evaluation.

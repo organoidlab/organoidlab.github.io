@@ -1,0 +1,629 @@
+/* ═══════════════════════════════════════════════════════════════
+   Organoid Neurobiology Lab
+   색과 폰트는 아래 :root 블록만 고치면 사이트 전체에 반영됩니다.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── 색 ────────────────────────────────────────────────────── */
+  --bg:          #fcfbf8;   /* 배경 (아주 옅은 웜 화이트) */
+  --ink:         #111c33;   /* 제목 */
+  --body:        #3d465c;   /* 본문 */
+  --muted:       #8b93a5;   /* 보조 텍스트 (연도, 라벨) */
+  --rule:        #e2e3e8;   /* 구분선 */
+  --accent:      #1b3a6b;   /* 액센트 (링크, 번호, 사진 그림자) */
+  --accent-soft: #eaeef6;   /* 액센트 배경 */
+  --accent-2:    #c07f1e;   /* 보조색 앰버 (번호, 라벨) */
+
+  /* 헤더 배경 효과 — 로고의 보라 계열. --fx-alpha 를 낮출수록 옅어집니다 */
+  --fx-1:     #c3aef5;
+  --fx-2:     #6f55cc;
+  --fx-alpha: 0.42;
+
+  /* 히어로 제목 강조 — 채도·명도 동일, 색상만 다름 */
+  --key-1:    #5c1b6b;   /* stem cells (H 285°) */
+  --key-2:    #1b3a6b;   /* disease models (H 214°) */
+  --key-link: #4a5468;   /* From / to */
+
+
+  /* ── 폰트 ──────────────────────────────────────────────────── */
+  --display: 'Newsreader', 'Display fallback', Georgia, serif;  /* 제목 (영문) */
+  --sans:    'Inter', 'Pretendard Variable', 'Sans fallback', system-ui, sans-serif; /* 본문 */
+  --mono:    'IBM Plex Mono', ui-monospace, monospace;          /* 라벨, 연도 */
+
+  /* ── 치수 ──────────────────────────────────────────────────── */
+  --wrap:    880px;   /* 콘텐츠 최대 너비 */
+  --measure: 64ch;    /* 본문 한 줄 최대 길이 */
+}
+
+/* ── 폰트 폴백 ─────────────────────────────────────────────────────
+   웹폰트가 도착하기 전에는 시스템 폰트로 먼저 글자가 보입니다.
+   그때 글자 크기가 튀지 않도록, 시스템 폰트의 크기를 미리 맞춰둡니다.
+   (이게 없으면 첫 방문 시 로고와 제목이 잠깐 커졌다 줄어듭니다)
+   ───────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Display fallback';
+  src: local('Georgia'), local('Times New Roman'), local('serif');
+  size-adjust: 103%;
+  ascent-override: 92%;
+  descent-override: 24%;
+}
+@font-face {
+  font-family: 'Sans fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('sans-serif');
+  size-adjust: 107%;
+  ascent-override: 90%;
+  descent-override: 22%;
+}
+
+/* ── 기본 초기화 ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;   /* 페이지 길이와 무관하게 정렬 고정 */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+main { flex: 1 0 auto; }
+
+/* 히어로 배경 도형.
+   .hero 가 아니라 main 을 기준으로 두어 도형 하단이 푸터 경계선에 맞습니다.
+   Home 은 내용이 짧아 main 아래쪽에 여백이 남는데, 그 자리를 채웁니다. */
+.site-main {
+  position: relative;
+  overflow: hidden;        /* 가로로 넘친 부분만 자릅니다 */
+}
+
+.page-motif {
+  position: absolute;
+  right: -70px;
+  bottom: 0;               /* 푸터 경계선에 하단을 맞춤 */
+  width: 520px;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero { position: relative; z-index: 1; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* 드래그 선택 색. 기본 파랑 대신 사이트 액센트(네이비)를 옅게 씁니다. */
+::selection {
+  background: rgba(27, 58, 107, 0.16);
+  color: var(--ink);
+}
+::-moz-selection {
+  background: rgba(27, 58, 107, 0.16);
+  color: var(--ink);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--ink); color: var(--bg);
+  padding: 10px 16px; z-index: 10;
+}
+.skip:focus { left: 12px; top: 12px; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ── 헤더 ─────────────────────────────────────────────────────── */
+.site-head {
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.head-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
+.site-head-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  flex-wrap: wrap;
+  padding-block: 20px;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ink);
+  min-width: 0;
+}
+.wordmark:hover { text-decoration: none; }
+.wordmark:hover .wordmark-text { color: var(--accent); }
+
+.wordmark-logo {
+  height: 34px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.wordmark-text {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.1;
+  color: inherit;
+  transition: color 0.15s;
+}
+
+.site-nav {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  font-size: 14px;
+  color: var(--body);          /* 배경 효과 위에서도 대비 확보 */
+  padding-bottom: 2px;
+}
+.site-nav a:hover { color: var(--ink); text-decoration: none; }
+.site-nav a.is-current {
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--accent);
+}
+
+/* ── 히어로 (Home) ────────────────────────────────────────────── */
+.hero { padding-block: 88px 96px; }
+
+.hero-inner { position: relative; z-index: 1; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.8;
+  margin: 0 0 26px;
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(2.3rem, 6.6vw, 4.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--key-link);          /* From / to — 연결어는 한 걸음 물러납니다 */
+  margin: 0;
+  max-width: 15ch;
+  text-wrap: balance;          /* 줄마다 길이를 고르게 나눕니다 */
+  font-variation-settings: 'opsz' 60;
+}
+
+/* 두 키워드는 대등합니다.
+   HSL 의 채도(59%)와 명도(26%)를 똑같이 두고 색상(H)만 다르게 잡았습니다.
+   그래서 어느 쪽도 앞으로 튀어나오지 않습니다. */
+.hero-title em {
+  font-style: normal;
+  font-weight: 450;
+}
+.hero-title .k1 { color: var(--key-1); }   /* stem cells */
+.hero-title .k2 { color: var(--key-2); }   /* disease models */
+
+.hero .hero-lede {          /* .prose 보다 뒤에 와야 하므로 우선순위를 올립니다 */
+  margin-top: 34px;
+  max-width: 54ch;
+  font-size: 17px;
+}
+
+/* ── 일반 페이지 ──────────────────────────────────────────────── */
+.page { padding-block: 64px 88px; }
+
+.page-head { margin-bottom: 56px; }
+
+.page-title {
+  text-wrap: balance;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4.6vw, 2.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.page-intro { margin-top: 20px; max-width: var(--measure); }
+
+.prose { max-width: var(--measure); }
+.prose p { margin: 0 0 1.1em; text-wrap: pretty; }
+.topic-body .prose p { margin: 0 0 1.5em; }   /* 주제 안 문단은 조금 더 띄웁니다 */
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+.prose h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 2.2em 0 0.7em;
+}
+.prose h3:first-child { margin-top: 0; }
+
+.prose h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 1.8em 0 0.6em;
+}
+
+/* 한글은 단어 중간에서 줄바꿈되지 않도록 */
+.prose, .cv-list, .topic-body { word-break: keep-all; }
+
+/* ── Research ─────────────────────────────────────────────────── */
+.topics { display: flex; flex-direction: column; }
+
+.topic {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 0 28px;
+  padding-block: 44px;
+  border-top: 1px solid var(--rule);
+}
+.topic:last-child { border-bottom: 1px solid var(--rule); }
+
+.topic-num {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 46px;
+  line-height: 1;
+  color: var(--accent-2);
+  opacity: 0.95;
+  letter-spacing: -0.03em;
+  padding-top: 4px;
+  font-variation-settings: 'opsz' 48;
+}
+
+.topic-body { min-width: 0; }
+
+.topic-title {
+  text-wrap: balance;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3.2vw, 1.7rem);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.topic-keys {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin: 0 0 18px;
+  overflow-wrap: anywhere;
+}
+
+/* ── Publications ─────────────────────────────────────────────── */
+.pubs { list-style: none; margin: 0; padding: 0; }
+
+.pub {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 0 28px;
+  padding-block: 26px;
+  border-top: 1px solid var(--rule);
+}
+.pub:last-child { border-bottom: 1px solid var(--rule); }
+
+.pub-year {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  padding-top: 5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pub-body { min-width: 0; }
+
+.pub-title {
+  text-wrap: pretty;           /* 마지막 줄에 단어 하나만 남지 않게 */
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0 0 7px;
+}
+
+.pub-authors {
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin: 0 0 4px;
+  overflow-wrap: anywhere;
+}
+.pub-authors strong { color: var(--ink); font-weight: 600; }
+
+.pub-meta {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pub-journal { font-style: italic; }
+
+.pub-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 26px 0 0;
+}
+
+.pub-doi {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  margin-left: 10px;
+  overflow-wrap: anywhere;
+}
+
+/* ── Team ─────────────────────────────────────────────────────── */
+.group { margin-bottom: 64px; }
+.group:last-child { margin-bottom: 0; }
+
+.group-label {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.8;
+  margin: 0 0 30px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.person {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 0 34px;
+  align-items: start;
+  padding-bottom: 44px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid var(--rule);
+}
+.person:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.person--lead { grid-template-columns: 190px 1fr; gap: 0 40px; }
+
+.person-photo { min-width: 0; }
+
+.person-photo img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  box-shadow: 2px 2px 0 var(--accent);
+  background: var(--accent-soft);
+}
+
+.person-body { min-width: 0; }
+
+.person-name {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.person--lead .person-name { font-size: 24px; }
+
+.person-role {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 3px;
+  overflow-wrap: anywhere;
+}
+
+.cv { margin-top: 22px; }
+
+.cv-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin: 0 0 9px;
+}
+
+.cv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.cv-list li strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.cv-list li em {
+  font-style: italic;
+  color: var(--body);
+}
+
+.cv-list li {
+  padding-left: 15px;
+  position: relative;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+.cv-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.72em;
+  width: 5px; height: 1px;
+  background: var(--muted);
+}
+
+/* ── 푸터 ─────────────────────────────────────────────────────── */
+.site-foot {
+  border-top: 1px solid var(--rule);
+  margin-top: 24px;
+}
+
+.site-foot-inner {
+  padding-block: 26px 40px;
+}
+
+.foot-name {
+  font-family: var(--display);
+  font-size: 14.5px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  overflow-wrap: anywhere;
+}
+
+.foot-meta {
+  font-size: 13px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.foot-meta a { color: var(--muted); }
+.foot-meta a:hover { color: var(--accent); }
+
+/* ── 반응형 ───────────────────────────────────────────────────── */
+/* 좁은 화면: 도형을 글 위치까지 올려 배경처럼 깔되,
+   투명도를 낮춰 본문 가독성을 지킵니다. */
+@media (max-width: 900px) {
+  .hero { padding-block: 64px 120px; }
+  .page-motif {
+    width: 380px;
+    right: -110px;
+    bottom: 40px;
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero { padding-block: 56px 100px; }
+  .page-motif { width: 320px; right: -100px; bottom: 36px; opacity: 0.40; }
+}
+
+@media (max-width: 380px) {
+  .hero { padding-block: 52px 88px; }
+  .page-motif { width: 280px; right: -90px; bottom: 32px; opacity: 0.36; }
+}
+
+@media (max-width: 720px) {
+  .topic, .pub {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .topic-num {
+    font-size: 32px;
+    margin-bottom: 10px;
+    padding-top: 0;
+  }
+  .pub-year { padding-top: 0; margin-bottom: 5px; }
+
+  .person, .person--lead {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .person-photo { max-width: 132px; margin-bottom: 22px; }
+  .person--lead .person-photo { max-width: 158px; }
+
+  .page { padding-block: 48px 64px; }
+  .page-head { margin-bottom: 42px; }
+}
+
+/* 좁은 화면: 메뉴가 한 줄을 통째로 쓰면서 폭 전체에 균등 배분됩니다.
+   글자 크기를 줄이지 않고도 줄바꿈을 막습니다. */
+@media (max-width: 560px) {
+  .site-nav {
+    flex: 1 1 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wordmark-logo { height: 28px; }
+  .wordmark-text { font-size: 18px; }
+  .wordmark { gap: 9px; }
+}
+
+@media (max-width: 420px) {
+  .wrap { padding-inline: 18px; }
+  .site-nav a { font-size: 13.5px; }
+  /* space-between 이므로 gap 은 최소 간격일 뿐입니다.
+     낮춰두면 좁은 화면에서 줄바꿈을 막고, 남는 공간은 알아서 균등 배분됩니다. */
+  .site-nav { gap: 6px; }
+}
+
+/* 320px 이하에서는 5개 항목이 한 줄에 물리적으로 들어가지 않습니다.
+   글자를 더 줄이는 대신 두 줄로 가운데 정렬해 정돈되게 둡니다. */
+@media (max-width: 344px) {
+  .wrap { padding-inline: 14px; }
+  .site-nav { justify-content: center; gap: 7px 15px; }
+}
+
+/* ── 접근성 ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── 인쇄 ─────────────────────────────────────────────────────── */
+@media print {
+  .site-nav, .skip { display: none; }
+  body { font-size: 11pt; }
+}
