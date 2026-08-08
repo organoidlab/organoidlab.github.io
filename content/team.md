@@ -1,4 +1,4 @@
 ---
-title: Team
+title: People
 layout: team
 ---
