@@ -19,6 +19,11 @@
   --fx-2:     #6f55cc;
   --fx-alpha: 0.42;
 
+  /* WebGL 이 안 되는 기기(일부 iOS 등)에서 헤더에 깔리는 CSS 배경.
+     위 --fx-1 / --fx-2 와 같은 계열이라 기기가 달라도 인상이 유지됩니다. */
+  --fx-bg-1: rgba(195, 174, 245, 0.50);
+  --fx-bg-2: rgba(111,  85, 204, 0.26);
+
   /* 히어로 제목 강조 — 채도·명도 동일, 색상만 다름 */
   --key-1:    #5c1b6b;   /* stem cells (H 285°) */
   --key-2:    #1b3a6b;   /* disease models (H 214°) */
@@ -141,12 +146,33 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   position: relative;
   isolation: isolate;
   overflow: hidden;
+
+  /* 기본 배경 — 방울 애니메이션이 뜨지 않는 기기에서도 이 그라데이션이 남습니다. */
+  background:
+    radial-gradient(120px 78px at 13% 58%, var(--fx-bg-1), transparent 70%),
+    radial-gradient(140px 88px at 39% 38%, var(--fx-bg-2), transparent 72%),
+    radial-gradient(130px 82px at 68% 62%, var(--fx-bg-1), transparent 70%),
+    radial-gradient(115px 74px at 90% 40%, var(--fx-bg-2), transparent 72%);
+}
+
+/* WebGL 방울이 실제로 그려진 경우에만 header-fx.js 가 이 클래스를 붙입니다. */
+.site-head.fx-on {
+  background: none;
+}
+
+/* 좁은 화면에서는 방울 두 개 분량만 남겨 답답하지 않게 합니다. */
+@media (max-width: 560px) {
+  .site-head {
+    background:
+      radial-gradient(96px 62px at 20% 58%, var(--fx-bg-1), transparent 70%),
+      radial-gradient(108px 70px at 72% 42%, var(--fx-bg-2), transparent 72%);
+  }
 }
 
 .head-fx {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   display: block;
 }
