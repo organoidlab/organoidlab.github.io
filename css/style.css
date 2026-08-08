@@ -272,9 +272,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .hero .hero-lede {          /* .prose 보다 뒤에 와야 하므로 우선순위를 올립니다 */
   margin-top: 34px;
   max-width: 54ch;
-  font-size: 20px;
-  font-family: var(--display);   /* Newsreader */
-
+  font-size: 17px;
 }
 
 /* ── 일반 페이지 ──────────────────────────────────────────────── */
