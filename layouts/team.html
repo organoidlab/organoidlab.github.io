@@ -15,7 +15,7 @@
 
   {{ with $t.members }}
   <section class="group">
-    <h2 class="group-label">Lab Members</h2>
+    <h2 class="group-label">Members</h2>
     {{ range . }}
       {{ partial "person.html" (dict "p" . "lead" false) }}
     {{ end }}
