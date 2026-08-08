@@ -1,3 +1,7 @@
+---
+title: Contact
+---
+
 ### Where to find us
 
 Room 7324-B, KIST L7 Building
