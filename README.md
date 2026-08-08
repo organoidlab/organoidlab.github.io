@@ -168,5 +168,4 @@ layouts/                   HTML 틀
   _partials/                 헤더, 푸터, 인물 블록
 static/                    CSS, 사진 (그대로 복사됨)
 .github/workflows/         자동 빌드 설정 (건드릴 일 없음)
-preview/                   미리보기용 빌드 결과 (편집 금지)
 ```
