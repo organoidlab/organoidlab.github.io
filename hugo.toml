@@ -21,7 +21,7 @@ title = 'Organoids for Neuroscience Lab'
   weight = 2
 
 [[menu.main]]
-  name = 'Team'
+  name = 'People'
   url = '/team/'
   weight = 3
 
